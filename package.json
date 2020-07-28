@@ -1,0 +1,11 @@
+{
+  "name": "viajesnodejs",
+  "version": "1.0.0",
+  "description": "Aprendiendo NodeJS, Express y Sequelize",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Javier Lozano",
+  "license": "ISC"
+}
