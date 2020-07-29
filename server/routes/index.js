@@ -22,7 +22,7 @@ module.exports = function () {
       .then((resviajes) => {
         res.render('viajes', {
           pagina: 'Próximos viajes',
-          viajes: resviajes,
+          listViajes: resviajes,
         });
       })
       .catch((err) => {
