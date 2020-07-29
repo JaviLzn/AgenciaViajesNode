@@ -15,6 +15,9 @@ const Viaje = db.define('Viaje', {
         FechaRegreso: {
             type: Sequelize.DATE,
         },
+        UrlImagen: {
+            type: Sequelize.STRING,
+        },
         Descripcion: {
             type: Sequelize.STRING,
         },
