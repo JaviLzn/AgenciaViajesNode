@@ -2,7 +2,8 @@
 const express = require('express');
 const path = require('path');
 const routes = require('./routes');
-const { allowedNodeEnvironmentFlags } = require('process');
+
+const configs = require('./config');
 
 // configurar express
 const app = express();
@@ -16,6 +17,12 @@ app.set('views', path.join(__dirname, './views'));
 // Cargar una carpeta estatica llamada public
 // se le indica a express donde van a estar los archivos estaticos
 app.use(express.static('public'));
+
+// Validar en que ambiente estamos
+const config = configs[app.get('env')];
+
+// Creamos la variable para el sitio web
+app.locals.titulo = config.nombreSitio;
 
 // Muestra el año actual
 app.use((req, res, next) => {
