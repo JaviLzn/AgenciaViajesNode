@@ -42,7 +42,6 @@ module.exports = function () {
         res.render('viaje', {
           pagina: resviaje.Titulo,
           viaje: resviaje,
-          
         });
       })
       .catch((err) => {
@@ -54,14 +53,40 @@ module.exports = function () {
       });
   });
 
-
-    // Nosotros GET
-    router.get('/testimoniales', (req, res) => {
-      res.render('testimoniales', {
-        pagina: 'Testimoniales',
-      });
+  // Testimoniales GET
+  router.get('/testimoniales', (req, res) => {
+    res.render('testimoniales', {
+      pagina: 'Testimoniales',
     });
-  
+  });
+
+  // Tesmimoniales POST: cuando se llena el formulario
+  router.post('/testimoniales', (req, res) => {
+    // Validar Campos
+    let { nombre, correo, mensaje } = req.body;
+
+    let errores = [];
+
+    if (!nombre) {
+      errores.push({ mensaje: 'Agrega tu Nombre' });
+    }
+    if (!correo) {
+      errores.push({ mensaje: 'Agrega tu Correo' });
+    }
+    if (!mensaje) {
+      errores.push({ mensaje: 'Agrega tu Mensaje' });
+    }
+
+    // Revisar Errores
+    if (errores.length > 0) {
+      //Muestra la vista con Errores
+      console.log('hay errores');
+      console.log(errores);
+    } else {
+      // almacenar en la base de datos
+      console.log('todo ok');
+    }
+  });
 
   return router;
 };

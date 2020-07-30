@@ -9,7 +9,7 @@ block contenido
         
                 .row.justify-content-center
                     .col-md-8
-                        form
+                        form(action="/testimoniales", method="POST")
                             .form-group
                                 label(for="nombre" ) Nombre
                                 input(id="nombre",class="form-control", type="text", placeholder="Tu nombre", name="nombre")
@@ -18,5 +18,5 @@ block contenido
                                 input(id="correo",class="form-control", type="email", placeholder="Tu Correo Electrónico", name="correo")
                             .form-group
                                 label(for="correo" ) Mensaje
-                                textarea#mensaje(class="form-control",name="mensaje", rows="3", placeholder="Tu Mensaje")
+                                textarea#mensaje(class="form-control", rows="3", placeholder="Tu Mensaje", name="mensaje")
                             input.btn.btn-success.btn-block(type="submit", value="Agregar")
