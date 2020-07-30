@@ -24,9 +24,6 @@ const Viaje = db.define('Viaje', {
         LugaresDisponibles: {
             type: Sequelize.STRING,
         },
-    },
-    {
-        freezeTableName: true,
     }
 );
 

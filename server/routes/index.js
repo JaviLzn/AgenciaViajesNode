@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const Viaje = require('../models/Viaje');
-const Testimonial = require('../models/Testimonial');
+/* Controllers */
+const nosotrosController = require('../controllers/nosotrosController')
+const homeController = require('../controllers/homeController')
+const viajesController = require('../controllers/viajesController')
+const testimonialesController = require('../controllers/testimonialesController');
 
 module.exports = function () {
   // router.use((req, res, next) => {
@@ -11,117 +14,17 @@ module.exports = function () {
   // })
 
   // Index GET
-  router.get('/', (req, res) => {
-    // Para varias devolver varias consultas a la misma vista
-    // se hace un arreglo de promises
-    const arrPromesas = [];
-
-    arrPromesas.push(Viaje.findAll({ limit: 3 }));
-    //arrPromesas.push(Testimonial.findAll({ limit: 3 }));
-
-    const resultado = Promise.all(arrPromesas);
-
-    resultado
-      .then((result) => {
-        res.render('index', {
-          pagina: 'Inicio',
-          clase: 'home',
-          Viajes: result[0]
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  });
-
+  router.get('/', homeController.getHomePage );
   // Nosotros GET
-  router.get('/nosotros', (req, res) => {
-    res.render('nosotros', {
-      pagina: 'Sobre nosotros',
-    });
-  });
-
+  router.get('/nosotros', nosotrosController.infoNosotros );
   // Viajes GET
-  router.get('/viajes', (req, res) => {
-    Viaje.findAll()
-      .then((Viajes) => {
-        res.render('viajes', {
-          pagina: 'Próximos viajes',
-          Viajes: Viajes,
-        });
-      })
-      .catch((err) => {
-        console.log('Ocurrió un error al consultar viajes', err);
-      });
-  });
-
+  router.get('/viajes', viajesController.listViajes);
   // Viaje GET by Id
-  router.get('/viajes/:id', (req, res) => {
-    Viaje.findByPk(req.params.id)
-      .then((resViaje) => {
-        res.render('viaje', {
-          pagina: resViaje.Titulo,
-          viaje: resViaje,
-        });
-      })
-      .catch((err) => {
-        console.log(
-          'Ocurrió un error al consultar viaje por id: ',
-          req.params.id,
-          err
-        );
-      });
-  });
-
+  router.get('/viajes/:id', viajesController.getViaje);
   // Testimoniales GET
-  router.get('/testimoniales', (req, res) => {
-    Testimonial.findAll()
-      .then((testimoniales) =>
-        res.render('testimoniales', { pagina: 'Testimoniales', testimoniales })
-      )
-      .catch((err) => console.log(err));
-  });
-
+  router.get('/testimoniales', testimonialesController.listTestimoniales);
   // Tesmimoniales POST: cuando se llena el formulario
-  router.post('/testimoniales', (req, res) => {
-    // Validar Campos
-    let { nombre, correo, mensaje } = req.body;
-
-    let errores = [];
-
-    if (!nombre) {
-      errores.push({ mensaje: 'Agrega tu Nombre' });
-    }
-    if (!correo) {
-      errores.push({ mensaje: 'Agrega tu Correo' });
-    }
-    if (!mensaje) {
-      errores.push({ mensaje: 'Agrega tu Mensaje' });
-    }
-
-    // Revisar Errores
-    if (errores.length > 0) {
-      //Muestra la vista con Errores
-      res.render('testimoniales', {
-        pagina: 'Testimoniales',
-        errores,
-        nombre,
-        correo,
-        mensaje,
-      });
-    } else {
-      // almacenar en la base de datos
-      Testimonial.create({
-        Nombre: nombre,
-        Correo: correo,
-        Mensaje: mensaje,
-      })
-        .then(() => res.redirect('/testimoniales'))
-        .catch((err) =>
-          console.log('Ocurrió un error al crear un testimonial: ', err)
-        );
-    }
-  });
+  router.post('/testimoniales', testimonialesController.createTestimonial);
 
   return router;
 };
