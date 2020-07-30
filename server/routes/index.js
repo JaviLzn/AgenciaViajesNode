@@ -20,7 +20,7 @@ module.exports = function () {
   // Viajes GET
   router.get('/viajes', viajesController.listViajes);
   // Viaje GET by Id
-  router.get('/viajes/:id', viajesController.getViaje);
+  router.get('/viajes/:Id', viajesController.getViaje);
   // Testimoniales GET
   router.get('/testimoniales', testimonialesController.listTestimoniales);
   // Tesmimoniales POST: cuando se llena el formulario

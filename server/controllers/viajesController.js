@@ -10,7 +10,7 @@ exports.listViajes = async (req, res) => {
 };
 
 exports.getViaje = async (req, res) => {
-  const viaje = await Viaje.findByPk(req.params.id);
+  const viaje = await Viaje.findByPk(req.params.Id);
   res.render('viaje', {
     pagina: viaje.Titulo,
     viaje
