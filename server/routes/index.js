@@ -54,5 +54,14 @@ module.exports = function () {
       });
   });
 
+
+    // Nosotros GET
+    router.get('/testimoniales', (req, res) => {
+      res.render('testimoniales', {
+        pagina: 'Testimoniales',
+      });
+    });
+  
+
   return router;
 };
