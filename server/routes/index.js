@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const Viaje = require('../models/Viaje');
+const Testimonial = require('../models/Testimonial');
 
 module.exports = function () {
   // router.use((req, res, next) => {
@@ -85,11 +86,19 @@ module.exports = function () {
         errores,
         nombre,
         correo,
-        mensaje
-      })
+        mensaje,
+      });
     } else {
       // almacenar en la base de datos
-      console.log('todo ok');
+      Testimonial.create({
+        Nombre: nombre,
+        Correo: correo,
+        Mensaje: mensaje,
+      })
+        .then(() => res.redirect('/testimoniales'))
+        .catch((err) =>
+          console.log('Ocurrió un error al crear un testimonial: ', err)
+        );
     }
   });
 

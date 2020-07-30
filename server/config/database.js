@@ -14,5 +14,6 @@ module.exports = new Sequelize('AgenciaViajes', 'Javi', '123', {
     //Evita el uso obligatorio de los campot createAt y updateAt en el modelo 
     // y en las consultas 
     timestamps: false,
+    freezeTableName: true
   },
 });
