@@ -1,31 +1,18 @@
 const Viaje = require('../models/Viaje');
 
-exports.listViajes =(req, res) => {
-    Viaje.findAll()
-      .then((Viajes) => {
-        res.render('viajes', {
-          pagina: 'Próximos viajes',
-          Viajes: Viajes,
-        });
-      })
-      .catch((err) => {
-        console.log('Ocurrió un error al consultar viajes', err);
-      });
-  }
+exports.listViajes = async (req, res) => {
+  const Viajes = await Viaje.findAll();
 
-  exports.getViaje = (req, res) => {
-    Viaje.findByPk(req.params.id)
-      .then((resViaje) => {
-        res.render('viaje', {
-          pagina: resViaje.Titulo,
-          viaje: resViaje,
-        });
-      })
-      .catch((err) => {
-        console.log(
-          'Ocurrió un error al consultar viaje por id: ',
-          req.params.id,
-          err
-        );
-      });
-    }
+  res.render('Viajes', {
+    pagina: 'Próximos viajes',
+    Viajes: Viajes,
+  });
+};
+
+exports.getViaje = async (req, res) => {
+  const viaje = await Viaje.findByPk(req.params.id);
+  res.render('viaje', {
+    pagina: viaje.Titulo,
+    viaje
+  });
+};
