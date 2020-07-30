@@ -80,8 +80,13 @@ module.exports = function () {
     // Revisar Errores
     if (errores.length > 0) {
       //Muestra la vista con Errores
-      console.log('hay errores');
-      console.log(errores);
+      res.render('testimoniales', {
+        pagina: 'Testimoniales',
+        errores,
+        nombre,
+        correo,
+        mensaje
+      })
     } else {
       // almacenar en la base de datos
       console.log('todo ok');
