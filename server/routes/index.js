@@ -12,9 +12,19 @@ module.exports = function () {
 
   // Index GET
   router.get('/', (req, res) => {
-    res.render('index', {
-      clase: 'home'
-    });
+    Viaje.findAll({
+      limit: 3,
+    })
+      .then((Viajes) => {
+        res.render('index', {
+          pagina: 'Inicio',
+          clase: 'home',
+          Viajes,
+        });
+      })
+      .catch((err) => {
+        console.log('Ocurrió un error al consultar viajes', err);
+      });
   });
 
   // Nosotros GET
@@ -27,10 +37,10 @@ module.exports = function () {
   // Viajes GET
   router.get('/viajes', (req, res) => {
     Viaje.findAll()
-      .then((resviajes) => {
+      .then((Viajes) => {
         res.render('viajes', {
           pagina: 'Próximos viajes',
-          listViajes: resviajes,
+          Viajes: Viajes,
         });
       })
       .catch((err) => {
@@ -41,10 +51,10 @@ module.exports = function () {
   // Viaje GET by Id
   router.get('/viajes/:id', (req, res) => {
     Viaje.findByPk(req.params.id)
-      .then((resviaje) => {
+      .then((resViaje) => {
         res.render('viaje', {
-          pagina: resviaje.Titulo,
-          viaje: resviaje,
+          pagina: resViaje.Titulo,
+          viaje: resViaje,
         });
       })
       .catch((err) => {
