@@ -12,7 +12,9 @@ module.exports = function () {
 
   // Index GET
   router.get('/', (req, res) => {
-    res.render('index');
+    res.render('index', {
+      clase: 'home'
+    });
   });
 
   // Nosotros GET
