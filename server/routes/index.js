@@ -56,9 +56,11 @@ module.exports = function () {
 
   // Testimoniales GET
   router.get('/testimoniales', (req, res) => {
-    res.render('testimoniales', {
-      pagina: 'Testimoniales',
-    });
+    Testimonial.findAll()
+      .then((testimoniales) =>
+        res.render('testimoniales', { pagina: 'Testimoniales', testimoniales })
+      )
+      .catch((err) => console.log(err));
   });
 
   // Tesmimoniales POST: cuando se llena el formulario
