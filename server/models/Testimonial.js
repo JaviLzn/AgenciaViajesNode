@@ -3,6 +3,11 @@ const Sequelize = require('sequelize');
 const db = require('../config/database');
 
 const Testimonial = db.define('Testimonial', {
+  Id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
   Nombre: {
     type: Sequelize.STRING,
   },
