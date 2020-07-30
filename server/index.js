@@ -8,13 +8,13 @@ const configs = require('./config');
 const db = require('./config/database');
 
 // Probar autenticacion a la base de datos
-// db.authenticate()
-//   .then(() => {
-//     console.log('db conectada');
-//   })
-//   .catch((err) => {
-//     console.log('db error: ', err);
-//   });
+db.authenticate()
+  .then(() => {
+    console.log('DB conectada');
+  })
+  .catch((err) => {
+    console.log('db error: ', err);
+  });
 
 
 // configurar express
