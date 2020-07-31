@@ -11,6 +11,6 @@
                             |  #{viaje.FechaIda} - #{viaje.FechaRegreso}
                         p
                             i.fas.fa-dollar-sign.fa-lg 
-                            |  #{viaje.Precio}
+                            |  #{(viaje.Precio).toLocaleString('en', {maximumFractionDigits:0}) }
                         p= viaje.Descripcion.substr(0,100)
                         a(href=`viajes/${viaje.Id}`, class="btn btn-success btn-block") Más información
