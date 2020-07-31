@@ -5,7 +5,7 @@ exports.listViajes = async (req, res) => {
 
   res.render('Viajes', {
     pagina: 'Próximos viajes',
-    Viajes: Viajes,
+    Viajes
   });
 };
 
