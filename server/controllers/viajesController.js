@@ -3,7 +3,7 @@ const Viaje = require('../models/Viaje');
 exports.listViajes = async (req, res) => {
   const Viajes = await Viaje.findAll();
 
-  res.render('Viajes', {
+  res.render('viajes', {
     pagina: 'Próximos viajes',
     Viajes
   });
